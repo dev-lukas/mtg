@@ -108,14 +108,35 @@ function requestCardmarketData(name) {
         document.getElementById('searchInput').classList.remove("active");
         document.getElementById('price').innerHTML = '<div class="spinner-grow text-primary"></div>';
         document.getElementById('points').innerHTML = '<div class="spinner-grow text-primary"></div>';
-        let backup_cardname = name.replace(/'/g, '').replace(/\s/g, '-');
-        let cardname = name.replace(/'/g, '').replace(/-/g, '').replace(/\s/g, '-');
-        console.log(backup_cardname);
-        console.log(cardname);
+        let cardname = encodeCardmarketCard(name, 0);
+        let cardname_variation = encodeCardmarketCard(name, 1);
         const postData = new FormData();
         postData.append('cardname', cardname);
-        postData.append('backupCardname', backup_cardname);
+        postData.append('cardnameVariation', cardname_variation);
         sendData(postData);
+    }
+}
+
+//Since cardmarket uses wierd formatting for it's links we need to reformat typical cardnames
+function encodeCardmarketCard(cardname, mode) {
+    let result;
+    switch(mode) {
+        // Some - signs are kept, others not, this case they are kept
+        case 1:
+            result = cardname.replace(/'/g, '');
+            result = result.replace(/,/g, '');
+            result = result.replace(/\s/g, '-');
+            return result;
+            break;
+        // Default Case - remove everything
+        default:
+            result = cardname.replace(/'/g, '');
+            result = result.replace(/-/g, '');
+            result = result.replace(/,/g, '');
+            result = result.replace(/!/g, '');
+            result = result.replace(' // ', '-');
+            result = result.replace(/\s/g, '-');
+            return result;
     }
 }
 
@@ -135,7 +156,8 @@ async function sendData(postData) {
         document.getElementById('error').classList.toggle('hidden');
         setTimeout(function() {
             document.getElementById('error').classList.toggle('hidden');
-        }, 5000);
+        }, 15000);
+        document.getElementById('cardname').value = '';
     } else {
         const points = Math.ceil(parseFloat((price.replace(/s€/,'')).replace(',','.')));
         document.getElementById('price').innerHTML = price;

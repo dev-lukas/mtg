@@ -6,7 +6,7 @@ if(isset($_POST)) {
             if($i == 0) {
                 $cardname = $_POST['cardname'];
             } else {
-                $cardname = $_POST['backupCardname'];
+                $cardname = $_POST['cardnameVariation'];
             }
             $ch = curl_init();
             $config['useragent'] = 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0';
@@ -25,13 +25,16 @@ if(isset($_POST)) {
             curl_close($ch);
             if($found == 1) {
                 echo $match[0];
-                $i += 2;
+                exit;
             } else {
                 $i += 1;
             }
         }
+        echo '0';
+        exit;
     } catch (Exception $e) {
         echo '-1';
+        exit;
     }
 }
 ?>
