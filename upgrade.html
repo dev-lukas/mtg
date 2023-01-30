@@ -125,6 +125,8 @@ function encodeCardmarketCard(cardname, mode) {
         case 1:
             result = cardname.replace(/'/g, '');
             result = result.replace(/,/g, '');
+            result = result.replace(/!/g, '');
+            result = result.replace(/\s\/\/\s/g, '-');
             result = result.replace(/\s/g, '-');
             return result;
             break;
@@ -134,7 +136,7 @@ function encodeCardmarketCard(cardname, mode) {
             result = result.replace(/-/g, '');
             result = result.replace(/,/g, '');
             result = result.replace(/!/g, '');
-            result = result.replace(' // ', '-');
+            result = result.replace(/\s\/\/\s/g, '-');
             result = result.replace(/\s/g, '-');
             return result;
     }
