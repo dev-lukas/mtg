@@ -1,17 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
   font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+:root {
+  --mcard-height: 30vh;
+  --mcard-width: calc(var(--mcard-height) / 1.5);
+  --grey-1: #121212;
+  --grey-2: #1b1b1b;
+  --grey-3: #2b2b2b;
+  --grey-4: #3b3b3b;
+  --grey-5: #4b4b4b;
+  --accent-1: #BB86FC;
+  --accent-2: #03DAC5;
 }
 
 body{
-  padding: 0 20px;
+  background-color: var(--grey-1);
+}
+
+.navbar {
+  background-color: var(--grey-2);
+}
+
+.navbar .navbar-brand {
+  color: white;
+}
+
+.navbar .nav-link.active {
+  color: var(--accent-2);
+}
+
+.navbar .nav-link {
+  color: white;
 }
 
 ::selection{
-  color: #fff;
+  color: #3b3b3b;
   background: #664AFF;
 }
 
@@ -21,7 +47,7 @@ body{
 }
 
 .container-search .searchInput{
-  background: #fff;
+  background: #3b3b3b;
   width: 100%;
   border-radius: 5px;
   position: relative;
@@ -50,7 +76,7 @@ body{
   max-height: 280px;
   overflow-y: auto;
   width: 100%;
-  background-color: #fff;
+  background-color: #3b3b3b;
 }
 
 .searchInput.active .resultBox{
@@ -103,11 +129,6 @@ body{
     border-radius: 50%;
  }
 
-:root {
-    --mcard-height: 30vh;
-    --mcard-width: calc(var(--mcard-height) / 1.5);
-}
-
 @property --rotate {
     syntax: "<angle>";
     initial-value: 132deg;
@@ -151,6 +172,12 @@ body{
 
 .hidden {
   display: none;
+}
+
+.linkbox {
+  height: 30vh;
+  color: white;
+  background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)
 }
 
 .mcard::before {
