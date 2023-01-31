@@ -9,8 +9,8 @@
   <link href="mtgcompanion.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm static-top bg-light">
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-sm static-top navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">MTG Companion</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapNavbar">
@@ -19,10 +19,10 @@
             <div class="collapse navbar-collapse" id="collapNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="randomizer.html" role="button" data-bs-toggle="dropdown">Challange</a>
+                        <a class="nav-link dropdown-toggle" href="randomizer.html" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="information.html">Informationen</a></li>
                             <li><a class="dropdown-item" href="randomizer.html">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item" href="history.html">Match History</a></li>
                             <li><a class="dropdown-item" href="upgrade.html">Upgrade Preis Checker</a></li>
                         </ul>
                     </li>
@@ -36,7 +36,7 @@
     <div class="container mx-auto text-center p-0 m-5">
         <h4>Coming Soon™</h4>
     </div>
-    <div class="container">
+    <div class="container mt-auto">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Impressum</a></li>

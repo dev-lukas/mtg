@@ -5,8 +5,6 @@
 }
 
 :root {
-  --mcard-height: 30vh;
-  --mcard-width: calc(var(--mcard-height) / 1.5);
   --grey-1: #121212;
   --grey-2: #1b1b1b;
   --grey-3: #2b2b2b;
@@ -14,6 +12,10 @@
   --grey-5: #4b4b4b;
   --accent-1: #BB86FC;
   --accent-2: #03DAC5;
+  --accent-3: #3700B3;
+  --error: #CF6679;
+  --mcard-height: 25vh;
+  --mcard-width: calc(var(--mcard-height) / 1.5);
 }
 
 body{
@@ -36,9 +38,26 @@ body{
   color: white;
 }
 
+.navbar .dropdown-menu {
+  color: white;
+  background-color: var(--grey-3);
+}
+
+.navbar .dropdown-item {
+  color: white;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: var(--grey-5);
+}
+
+.navbar .dropdown-item.active {
+  background-color: var(--accent-2);
+}
+
 ::selection{
-  color: #3b3b3b;
-  background: #664AFF;
+  color: var(--grey-5);
+  background: var(--accent-2);
 }
 
 .container-search{
@@ -47,14 +66,15 @@ body{
 }
 
 .container-search .searchInput{
-  background: #3b3b3b;
+  background: var(--grey-4);
   width: 100%;
   border-radius: 5px;
   position: relative;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
 }
 
-.searchInput input{
+.searchInput input {
+  background: var(--grey-5);
   height: 55px;
   width: 100%;
   outline: none;
@@ -65,18 +85,26 @@ body{
   box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
 }
 
-.searchInput.active input{
+.searchInput.active input {
   border-radius: 5px 5px 0 0;
 }
 
-.searchInput .resultBox{
+.searchInput .resultBox {
   padding: 0;
   opacity: 0;
   pointer-events: none;
   max-height: 280px;
-  overflow-y: auto;
   width: 100%;
-  background-color: #3b3b3b;
+  background-color: var(--grey-4);
+  border-color: var(--grey-5) !important;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.searchInput .resultBox::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .searchInput.active .resultBox{
@@ -85,7 +113,7 @@ body{
   pointer-events: auto;
 }
 
-.resultBox li{
+.resultBox li {
   list-style: none;
   padding: 8px 12px;
   display: none;
@@ -98,10 +126,10 @@ body{
   display: block;
 }
 .resultBox li:hover{
-  background: #efefef;
+  background: var(--accent-2);
 }
 
-.searchInput .icon{
+.searchInput .icon {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -110,24 +138,27 @@ body{
   text-align: center;
   line-height: 55px;
   font-size: 20px;
-  color: #644bff;
 }
 
-.circle-small {
-  height: 10vh;
-  width: 10vh;
-  background-color: powderblue;
-  color: #333;
-  border-radius: 50%;
+.price-box {
+  height: 15vh;
+  width: 15vh;
+  background-color: var(--grey-3);
+  border-style: solid;
+  border-radius: 25%;
+  border-width: 2px;
+  border-color: var(--accent-1);
 }
 
-.circle-big {
-    height: 20vh;
-    width: 20vh;
-    background-color: powderblue;
-    color: #333;
-    border-radius: 50%;
- }
+.spinner-border {
+  color: var(--accent-2);
+}
+
+.alert.alert-warning {
+  border-color: var(--grey-2);
+  background-color: var(--error);
+  color: white;
+}
 
 @property --rotate {
     syntax: "<angle>";
@@ -136,7 +167,7 @@ body{
 }
 
 .mcard {
-    background: #eeeef0;
+    background: var(--grey-3);
     width: var(--mcard-width);
     height: var(--mcard-height);
     padding: 3px;
@@ -146,14 +177,16 @@ body{
     align-items: center;
     text-align: center;
     display: flex;
-    color: rgb(0, 0, 0);
 }
 
 .mcard .title {
   font-weight: bold;
   font-size: 1.2em;
   position: absolute;
+  border-bottom: 2px solid var(--grey-5);
   top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
   opacity: 0;
   transition: opacity 2s;
 }
@@ -161,23 +194,20 @@ body{
 .mcard .description {
   font-size: 1em;
   position: absolute;
-  bottom: 10%;
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
   opacity: 0;
   transition: opacity 2s;
 }
 
-.fade {
-  opacity: 1 !important;
-}
-
-.hidden {
-  display: none;
-}
-
-.linkbox {
-  height: 30vh;
-  color: white;
-  background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)
+.mcard .points {
+  position: absolute;
+  border: 3px solid var(--grey-5);
+  border-radius: 5px;
+  width: 3vh;
+  bottom: 2%;
+  right: 2%;
 }
 
 .mcard::before {
@@ -185,7 +215,7 @@ body{
   width: 104%;
   height: 102%;
   border-radius: 8px;
-  background-color: powderblue;
+  background-color: var(--accent-1);
   position: absolute;
   z-index: -1;
   top: -1%;
@@ -197,35 +227,88 @@ body{
     background-color: rgb(255, 255, 255) 0%;
     background-image: linear-gradient(
       var(--rotate)
-      , powderblue, rgb(65, 179, 194) 43%, #1d92c4);
+      , var(--accent-3), var(--accent-2) 43%, var(--accent-1));
     animation: spin 2.5s linear infinite;
 }
   
-  .mcard.load::after {
-    position: absolute;
-    content: "";
-    top: calc(var(--mcard-height) / 6);
-    left: 0;
-    right: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
-    transform: scale(0.7);
-    filter: blur(calc(var(--mcard-height) / 6));
-    background-image: linear-gradient(
-      var(--rotate)
-      , powderblue, rgb(65, 179, 194) 43%, #1d92c4);
-      opacity: 1;
-    transition: opacity .5s;
-    animation: spin 2.5s linear infinite;
-  }
+.mcard.load::after {
+  position: absolute;
+  content: "";
+  top: calc(var(--mcard-height) / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.7);
+  filter: blur(calc(var(--mcard-height) / 6));
+  background-image: linear-gradient(
+    var(--rotate)
+    , var(--accent-3), var(--accent-2) 43%, var(--accent-1));
+    opacity: 1;
+  transition: opacity .5s;
+  animation: spin 2.5s linear infinite;
+}
 
-  @keyframes spin {
-    0% {
-      --rotate: 0deg;
-    }
-    100% {
-      --rotate: 360deg;
-    }
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
   }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+.fade {
+  opacity: 1 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.button-generate {
+  background-color: var(--grey-3);
+  width: 20vh;
+  height: 8vh;
+  border: 2px solid var(--grey-4);
+  border-radius: 15px;
+}
+
+.button-generate:hover {
+  border-color: var(--accent-2);
+}
+
+.reflink {
+  text-decoration: none;
+  color: var(--accent-2);
+}
+
+.reflink:hover {
+  color: var(--accent-3);
+}
+
+.landing-tile {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+  border: 2px solid var(--grey-2);
+  border-radius: 25px;
+  background-color: var(--grey-3);
+}
+
+.landing-tile:hover {
+  border-color: var(--accent-2);
+}
+
+.landing-icon {
+  position: absolute;
+  bottom: 35%;
+  color: var(--accent-1);
+}
+
+.landing-title {
+  position: absolute;
+  top: 30%;
+}

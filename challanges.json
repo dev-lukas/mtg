@@ -2,56 +2,67 @@
     {
         "id": 0,
         "name": "First Blood",
+        "points": 1,
         "content": "Mache als erstes Schaden an einem Gegner"
     },
     {
         "id": 1,
         "name": "Gruul Spirit",
+        "points": 1,
         "content": "Habe mehr als 30 Power auf dem Board"
     },
     {
         "id": 2,
         "name": "Peasent´s Sacrifice",
+        "points": 1,
         "content": "Opfere mehr als 5 Kreaturen in einer Runde"
     },
     {
         "id": 3,
         "name": "Healer",
+        "points": 1,
         "content": "Erreiche 60 Leben oder mehr"
     },
     {
         "id": 4,
         "name": "Kami",
+        "points": 1,
         "content": "Ziehe mehr als 10 Karten in einer Runde"
     },
     {
         "id": 5,
         "name": "Counter War",
+        "points": 1,
         "content": "Countere einen gegnerischen Counterspell"
     },
     {
         "id": 6,
         "name": "Myriad",
+        "points": 1,
         "content": "Greife alle Gegner gleichzeitig an"
     },
     {
         "id": 7,
         "name": "Commander Caster",
+        "points": 1,
         "content": "Caste deinen Commander viermal aus der Commandzone"
     },
     {
         "id": 8,
         "name": "Horder",
+        "points": 1,
         "content": "Habe mehr als 10 Treasures auf dem Spielfeld"
     },
     {
         "id": 9,
         "name": "The Snap",
+        "points": 1,
         "content": "Besiege 2 Mitspieler, sodass nur noch 2 Spieler übrig sind"
     },
     {
         "id": 10,
         "name": "Invincible",
+        "points": 3,
         "content": "Gewinne das Spiel ohne Schaden zu nehmen"
     }
 ]
