@@ -160,6 +160,11 @@ body{
   color: white;
 }
 
+.note {
+  font-size: 0.7em;
+  color: var(--grey-5);
+}
+
 @property --rotate {
     syntax: "<angle>";
     initial-value: 132deg;
