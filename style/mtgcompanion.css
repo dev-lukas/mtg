@@ -336,15 +336,16 @@ body{
 }
 
 .disclaimer {
-  border: 3px solid var(--accent-1);
+  border: 2px solid var(--grey-3);
   background-color: var(--grey-3);
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 1.4vh;
 }
 
 .pwform {
   border: 3px solid var(--grey-2);
   background-color: var(--grey-2);
+  border-color: var(--accent-1);
   border-radius: 15px;
   height: 45vh;
 }
@@ -373,7 +374,22 @@ body{
   background-color: var(--grey-5);
   border-radius: 5px;
   border: 2px solid (var(--grey-5));
+  height: 3vh;
   width: 20vw;
   min-width: 250px;
-  height: 3vh;
+}
+
+.modal-content {
+  text-align: center;
+  background-color: var(--grey-5);
+  border-color: var(--grey-5);
+}
+
+.modal-content i {
+  color: var(--error);
+  padding-bottom: 4vh;
+}
+
+.modal-header {
+  border-bottom: 0px;
 }

@@ -36,7 +36,7 @@ include_once 'backend/functions.php';
             </div>
         </div>
     </nav>
-    <div class="mt-auto pt-3 row mx-auto text-center">
+    <div id="content" class="mt-auto row mx-auto text-center">
         <?php 
         /*
         */
@@ -44,13 +44,13 @@ include_once 'backend/functions.php';
             if(isset($_GET['id']) and isset($_GET['identifier'])) {
                 if(is_numeric($_GET['id'])) {
                     $id = $_GET['id'];
-                    if(strcmp(getHash($id), $_GET['identifier']) == 0) {
-
-
+                    $userdata = getAllUserdata($id);
+                    if($userdata != false) {
+                        if(strcmp($userdata['registerhash'], $_GET['identifier']) == 0  && $userdata['password'] == '') {
         ?>    
-        <form class="pwform">
+        <form id="pwform" class="pwform">
             <div class="pt-5">
-                <h3>Hallo Lukas!</h3>
+                <h3>Hallo <?php echo $userdata['username']; ?>!</h3>
                 <br>
                 <div class="disclaimer">Dein Username ist dein Name</div>
             </div>
@@ -63,15 +63,53 @@ include_once 'backend/functions.php';
                 <input type="password" id="pw-2">
             </div>
             <div class="pt-5">
-                <button class="pw-btn" type="submit">Passwort setzen</button>
+                <button type="button" class="pw-btn" onclick="setPassword()">Passwort setzen</button>
             </div>
         </form>
-        <?php
+        <script>
+            async function setPassword() {
+                if(document.getElementById('pw-1').value == document.getElementById('pw-2').value) {
+                    const postData = new FormData();
+                    postData.append('id', "<?php echo $_GET['id']; ?>");
+                    postData.append('identifier', "<?php echo $_GET['identifier']; ?>");
+                    postData.append('password', document.getElementById('pw-1').value);
+                    const response = await fetch('backend/price_scraper.php', {
+                        method: 'POST',
+                        body: postData
+                    });
+                    const result = await response.text();
+                    switch(result) {
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            break;
                     }
+                } else {
+                    var warning = new bootstrap.Modal(document.getElementById('warning'), {
+                        keyboard: false
+                    });
+                    warning.show();
                 }
             }
-        }   
+        </script>
+        <?php
+        }}}}}   
         ?>
+    </div>
+    <div class="modal" id="warning">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">  
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title"><i class="fa-solid fa-triangle-exclamation fa-2xl"></i></h4>
+                    <span id="warning-content">Dein Passwort stimmt nicht überein!</span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
@@ -82,4 +120,11 @@ include_once 'backend/functions.php';
         </footer>
       </div>
 </body>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  if(document.getElementById('pwform') == null) {
+    document.getElementById('content').innerHTML = '<div id="error" role="alert" class="alert alert-warning"><strong>Oh nein!</strong> Hier ist wohl etwas schief gelaufen!</div>';
+  }
+});
+</script>
 </html>

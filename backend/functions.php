@@ -1,6 +1,10 @@
 <?php
 include_once 'mysql_bridge.php';
 
+function getAllUserdata($id) {
+    return query("SELECT * FROM `user` WHERE id='$id'");
+}
+
 function getHash($id) {
     return query("SELECT `registerhash` FROM `user` WHERE id='$id'");
 }
