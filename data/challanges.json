@@ -27,7 +27,7 @@
         "id": 4,
         "name": "Kami",
         "points": 1,
-        "content": "Ziehe mehr als 10 Karten in einer Runde"
+        "content": "Lasse einen Gegner mehr als 3 Karten in einer Runde ziehen"
     },
     {
         "id": 5,
@@ -39,7 +39,7 @@
         "id": 6,
         "name": "Myriad",
         "points": 1,
-        "content": "Greife alle Gegner gleichzeitig an"
+        "content": "Füge allen Gegnern gleichzeitig Kampfschaden an"
     },
     {
         "id": 7,
@@ -64,5 +64,17 @@
         "name": "Invincible",
         "points": 3,
         "content": "Gewinne das Spiel ohne Schaden zu nehmen"
+    },
+    {
+        "id": 11,
+        "name": "Back to Basic",
+        "points": 1,
+        "content": "Scheide aus einem Spiel aus während du nur Basic Lands gespielt hast"
+    },
+    {
+        "id": 12,
+        "name": "Discounter",
+        "points": 1,
+        "content": "Reduziere die Kosten eines Spells um 3"
     }
 ]
