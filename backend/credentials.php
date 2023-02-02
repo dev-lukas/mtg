@@ -1,9 +1,11 @@
 <?php
 /*
-    Storing our credentials for MYSQL Connection here
+    Storing our credentials here
 */
 $servername = "";
 $username = "";
 $password = "";
-$dbname = "mtg";
+$dbname = "";
+$clientID = '';
+$clientSecret = '';
 ?>

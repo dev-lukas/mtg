@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__.'/../../vendor/autoload.php');
-require_once(__DIR__.'/../credentials.php');
 require_once(__DIR__.'/../mysql_bridge.php');
 
 //Start or resume a session

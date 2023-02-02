@@ -3,7 +3,7 @@ include_once 'credentials.php';
 /*
     Wrapper-Function to query any sql that does expect a return and doesn´t have input that need to be escaped
     Input: Sanitized SQL-Query String
-    Output: Boolean false on Error or Return Value
+    Return: Boolean false on Error or Return Value
 */
 function query($sql) {
     global $servername, $username, $password, $dbname;
@@ -22,7 +22,7 @@ function query($sql) {
 /*
     Wrapper-Function to query any sql that doesn´t expect a return and doesn´t have input that need to be escaped
     Input: Sanitized SQL-Query String
-    Output: Boolean of Success
+    Return: Boolean of Success
 */
 function query_void($sql) {
     global $servername, $username, $password, $dbname;
@@ -38,9 +38,17 @@ function query_void($sql) {
 }
 
 /*
-	Returns all User-Data, since we only expect up to 20 entries
+	Returns all User-Data
+	Return: MYSQL Table Array Object 
 */
 function getUserData() {
     return query("SELECT * FROM `user`");
+}
+/*
+	Returns all Match-Data
+	Return: MYSQL Table Array Object 
+*/
+function getMatchData() {
+	return query("SELECT * FROM `matches`");
 }
 ?>

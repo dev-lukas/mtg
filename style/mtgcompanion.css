@@ -13,6 +13,7 @@
   --accent-1: #BB86FC;
   --accent-2: #03DAC5;
   --accent-3: #3700B3;
+  --success: #60C689;
   --error: #CF6679;
   --mcard-height: 25vh;
   --mcard-width: calc(var(--mcard-height) / 1.5);
@@ -132,7 +133,7 @@ body{
 .searchInput .icon {
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: 15px;
   height: 55px;
   width: 55px;
   text-align: center;
@@ -369,4 +370,50 @@ body{
 
 .logout i {
   padding-left: 0.7vh;
+}
+
+.logout i:hover {
+  color: var(--accent-2);
+}
+
+.match {
+  background-color: var(--grey-2);
+  border: 3px solid var(--grey-2);
+  border-radius: 15px;
+}
+
+.match .playerbox {
+  background-color: var(--grey-3);
+  border: 3px solid var(--grey-3);
+  border-radius: 15px;
+  position: relative;
+  height: 8vh;
+  width: 12vh;
+  margin-right: 2vh;
+  margin-left: 2vh;
+  margin-top: 2vh;
+}
+
+.match .playerbox .player {
+  position: absolute;
+  top: 20%;
+}
+
+.match .playerbox .points {
+  position: absolute;
+  bottom: 20%;
+  color: var(--accent-1);
+}
+
+.match .mcard {
+  border: 3px solid var(--grey-5);
+  margin-bottom: 1vh;
+}
+
+.match .playerbox.winner {
+  border-color: var(--success);
+}
+
+.match .mcard.achieved {
+  border-color: var(--success);  
 }

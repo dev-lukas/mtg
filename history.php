@@ -17,7 +17,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapNavbar">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="randomizer.html" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
@@ -37,13 +37,106 @@
                     </div>
                 </a>
                 <?php } else { ?>
-                <div>Hallo, <?php echo $_SESSION['name']; ?></div>
+                <div class="logout">
+                    Hallo <?php echo $_SESSION['name']; ?>!
+                    <a href="backend/auth/logout.php?site=history.php"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
+                </div>
                 <?php } ?>
             </div>
         </div>
     </nav>
-    <div class="container mx-auto text-center p-0 m-5">
-        <h5>Upgrade Punkte-Stand</h5>
+    <div id="matches" class="container mx-auto text-center p-0 m-5">
+        <h4 class="pb-3">Match History</h4>
+        <div class="match pt-3 mt-5 mx-auto">
+            <h5>22.10.2022</h5>
+            <div class="row justify-content-center">
+                <div class="playerbox col-3 d-flex justify-content-center">
+                    <div class="player">Lukas</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox winner col-3 d-flex justify-content-center">
+                    <div class="player">Konstantin</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox col-3 d-flex justify-content-center">
+                    <div class="player">Daniel</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox col-3 d-flex justify-content-center">
+                    <div class="player">Tino</div>
+                    <div class="points">4</div>
+                </div>
+            </div>
+            <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
+                <div class="col-3 mcard achieved mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+            </div>
+        </div>
+        <div class="match pt-3 mt-5 mx-auto">
+            <h5>22.10.2022</h5>
+            <div class="row justify-content-center">
+                <div class="playerbox col-2 d-flex justify-content-center">
+                    <div class="player">Lukas</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox winner col-2 d-flex justify-content-center">
+                    <div class="player">Konstantin</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox col-2 d-flex justify-content-center">
+                    <div class="player">Daniel</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox col-2 d-flex justify-content-center">
+                    <div class="player">Tino</div>
+                    <div class="points">4</div>
+                </div>
+                <div class="playerbox col-2 d-flex justify-content-center">
+                    <div class="player">Janis</div>
+                    <div class="points">4</div>
+                </div>
+            </div>
+            <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
+                <div class="col-3 mcard achieved mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+                <div class="col-3 mcard mx-auto">
+                    <span class="title fade">Life Saver</span>
+                    <span class="description fade">Rette einen Mitspieler</span>
+                    <span class="points fade">1</span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
@@ -53,4 +146,63 @@
           <p class="text-center text-muted">MTG Companion is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
         </footer>
       </div>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    loadMatchData();
+});
+
+async function loadMatchData() {
+    const response = await fetch('http://localhost/mtg/backend/matches/matches.php', {
+        method: 'GET',
+    });
+    const result = await response.json();
+    for(let i = 0; i < Object.keys(result).length; i++) {
+        document.getElementById('matches').innerHTML += `
+            <div class="match pt-3 mt-5 mx-auto">
+                <h5>${result[i].date}</h5>
+                <div class="row justify-content-center">
+                    <div class="playerbox col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_1}</div>
+                        <div class="points">4</div>
+                    </div>
+                    <div class="playerbox winner col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_2}</div>
+                        <div class="points">4</div>
+                    </div>
+                    <div class="playerbox col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_3}</div>
+                        <div class="points">4</div>
+                    </div>
+                    <div class="playerbox col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_4}</div>
+                        <div class="points">4</div>
+                    </div>
+                </div>
+                <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
+                    <div class="col-3 mcard achieved mx-auto">
+                        <span class="title fade">Life Saver</span>
+                        <span class="description fade">Rette einen Mitspieler</span>
+                        <span class="points fade">1</span>
+                    </div>
+                    <div class="col-3 mcard mx-auto">
+                        <span class="title fade">Life Saver</span>
+                        <span class="description fade">Rette einen Mitspieler</span>
+                        <span class="points fade">1</span>
+                    </div>
+                    <div class="col-3 mcard mx-auto">
+                        <span class="title fade">Life Saver</span>
+                        <span class="description fade">Rette einen Mitspieler</span>
+                        <span class="points fade">1</span>
+                    </div>
+                    <div class="col-3 mcard mx-auto">
+                        <span class="title fade">Life Saver</span>
+                        <span class="description fade">Rette einen Mitspieler</span>
+                        <span class="points fade">1</span>
+                    </div>
+                </div>
+            </div>     
+        `;
+    }
+}    
+</script>
 </html>

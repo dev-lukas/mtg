@@ -10,39 +10,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-dark navbar-expand-sm static-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">MTG Companion</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="information.php">Informationen</a></li>
-              <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
-              <li><a class="dropdown-item active" href="upgrade.php">Preis Checker</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="trading.php">Trade-Hub</a>
-          </li>
-        </ul>
-        <?php if(!isset($_SESSION['id'])) { ?>
+    <nav class="navbar navbar-dark navbar-expand-sm static-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">MTG Companion</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapNavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
+                            <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
+                            <li><a class="dropdown-item active" href="upgrade.php">Preis Checker</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trading.php">Trade-Hub</a>
+                    </li>
+                </ul>
+                <?php if(!isset($_SESSION['id'])) { ?>
                 <a class="google-sign-in" href="<?php echo $client->createAuthUrl(); ?>">
                     <div>
                         <i class="fa-brands fa-google"></i>Google Login
                     </div>
                 </a>
                 <?php } else { ?>
-                <div>Hallo, <?php echo $_SESSION['name']; ?></div>
+                <div class="logout">
+                    Hallo <?php echo $_SESSION['name']; ?>!
+                    <a href="backend/auth/logout.php?site=upgrade.php"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
+                </div>
                 <?php } ?>
-      </div>
-    </div>
-  </nav>
-  <div class="container mx-auto text-center p-0 m-5">
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto text-center p-0 m-5">
         <h4>Cardmarket Preis Checker</h4>
         <div class="container-search p-1 m-5 mx-auto">
             <div class="searchInput" id="searchInput">

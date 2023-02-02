@@ -17,7 +17,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="collapNavbar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
             <ul class="dropdown-menu">
@@ -31,14 +31,17 @@
           </li>
         </ul>
         <?php if(!isset($_SESSION['id'])) { ?>
-                <a class="google-sign-in" href="<?php echo $client->createAuthUrl(); ?>">
-                    <div>
-                        <i class="fa-brands fa-google"></i>Google Login
-                    </div>
-                </a>
-                <?php } else { ?>
-                <div>Hallo, <?php echo $_SESSION['name']; ?></div>
-                <?php } ?>
+        <a class="google-sign-in" href="<?php echo $client->createAuthUrl(); ?>">
+            <div>
+                <i class="fa-brands fa-google"></i>Google Login
+            </div>
+        </a>
+        <?php } else { ?>
+        <div class="logout">
+            Hallo <?php echo $_SESSION['name']; ?>!
+            <a href="backend/auth/logout.php?site=randomizer.php"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
+        </div>
+        <?php } ?>
       </div>
     </div>
   </nav>
