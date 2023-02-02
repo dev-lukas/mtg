@@ -335,61 +335,38 @@ body{
   padding-right: 15px;
 }
 
-.disclaimer {
-  border: 2px solid var(--grey-3);
-  background-color: var(--grey-3);
-  border-radius: 10px;
-  font-size: 1.4vh;
+.google-sign-in {
+  text-decoration: none;
+  font-size: 1.5vh;
+  padding-left: 0.5vh;
+  color: white;
 }
 
-.pwform {
-  border: 3px solid var(--grey-2);
-  background-color: var(--grey-2);
-  border-color: var(--accent-1);
+.google-sign-in div {
+  text-align: center;
+  background-color: var(--grey-4);
+  border: 3px solid var(--grey-4);
   border-radius: 15px;
-  height: 45vh;
+  width: 15vh;
 }
 
-.pwform button  {
-  border: 3px solid var(--grey-5);
-  border-radius: 15px;
-  background-color: var(--grey-5);
-  height: 5vh;
-}
-
-.pwform button:hover {
+.google-sign-in div:hover {
   border-color: var(--accent-2);
 }
 
-.pw {
-  padding-top: 3vh;
+.google-sign-in i {
+  padding-right: 0.7vh;
+  color: var(--accent-1);
 }
 
-.pw label {
-  font-size: 2vh;
-  padding-bottom: 2vh;
-}
-
-.pw input {
-  background-color: var(--grey-5);
-  border-radius: 5px;
-  border: 2px solid (var(--grey-5));
-  height: 3vh;
-  width: 20vw;
-  min-width: 250px;
-}
-
-.modal-content {
+.logout {
   text-align: center;
-  background-color: var(--grey-5);
-  border-color: var(--grey-5);
+  background-color: var(--grey-4);
+  border: 3px solid var(--grey-4);
+  border-radius: 15px;
+  width: 15vh;
 }
 
-.modal-content i {
-  color: var(--error);
-  padding-bottom: 4vh;
-}
-
-.modal-header {
-  border-bottom: 0px;
+.logout i {
+  padding-left: 0.7vh;
 }

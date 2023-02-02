@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include_once("backend/auth/google_auth.php"); ?>
 <html lang="de">
 <head>
   <title>MTG Companion</title>
@@ -12,24 +12,33 @@
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-sm static-top navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">MTG Companion</a>
+            <a class="navbar-brand" href="index.php">MTG Companion</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="randomizer.html" role="button" data-bs-toggle="dropdown">Challange</a>
+                        <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item active" href="information.html">Informationen</a></li>
-                            <li><a class="dropdown-item" href="randomizer.html">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item" href="upgrade.html">Preis Checker</a></li>
+                            <li><a class="dropdown-item active" href="information.php">Informationen</a></li>
+                            <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
+                            <li><a class="dropdown-item" href="upgrade.php">Preis Checker</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="trading.html">Trade-Hub</a>
+                        <a class="nav-link" href="trading.php">Trade-Hub</a>
                     </li>
                 </ul>
+                <?php if(!isset($_SESSION['id'])) { ?>
+                <a class="google-sign-in" href="<?php echo $client->createAuthUrl(); ?>">
+                    <div>
+                        <i class="fa-brands fa-google"></i>Google Login
+                    </div>
+                </a>
+                <?php } else { ?>
+                <div>Hallo, <?php echo $_SESSION['name']; ?></div>
+                <?php } ?>
             </div>
         </div>
     </nav>
@@ -38,7 +47,7 @@
         <div class="rulestext p-4 text-start">
             <div>Jeder Teilnehmer startet die Challange mit einem Precon-Commander Deck.
                  Wenn nun EDH Runden gespielt werden mit ausschließlich Challange Decks,
-                 werden drei zufällige <a class="reflink" href="randomizer.html">Challanges</a> ausgelost. Nun wird normal die Partie
+                 werden drei zufällige <a class="reflink" href="randomizer.php">Challanges</a> ausgelost. Nun wird normal die Partie
                  gespielt. Punkte werden danach wie folgt erhalten:</div>
             <ul class="p-2 text-start">
                 <li>Für das Teilnehmen an der Runde erhält jeder Spieler 3 Punkte</li>
@@ -50,7 +59,7 @@
             <ul class="p-2 text-start">
                 <li>Ganze Decks können immer zu anderen Precons getauscht werden. Hierbei verfallen alle bisherigen Punkte</li>
                 <li>Karten dürfen ohne Punkteausgabe durch Basic Lands ausgetauscht werden</li>
-                <li>Karten können geupgraded werden zum Punkte-Preis des <a class="reflink" href="upgrade.html">Preis Checkers</a></li>
+                <li>Karten können geupgraded werden zum Punkte-Preis des <a class="reflink" href="upgrade.php">Preis Checkers</a></li>
             </ul>
         </div>
     </div>
