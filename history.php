@@ -152,7 +152,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 async function loadMatchData() {
-    const response = await fetch('http://localhost/mtg/backend/matches/matches.php', {
+    const response = await fetch('backend/matches/matches.php', {
         method: 'GET',
     });
     const result = await response.json();

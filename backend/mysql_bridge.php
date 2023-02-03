@@ -51,4 +51,11 @@ function getUserData() {
 function getMatchData() {
 	return query("SELECT * FROM `matches`");
 }
+/*
+	Returns all Challange-Data
+	Return: MYSQL Table Array Object 
+*/
+function getChallangeData() {
+	return query("SELECT * FROM `challanges`");
+}
 ?>

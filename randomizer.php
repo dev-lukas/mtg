@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 async function loadChallangeData() {
-  const response = await fetch('data/challanges.json');
+  const response = await fetch('backend/challanges/challanges.php');
   const data = await response.json();
   challange_data = data;
 }
