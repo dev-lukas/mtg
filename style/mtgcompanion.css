@@ -13,6 +13,7 @@
   --accent-1: #BB86FC;
   --accent-2: #03DAC5;
   --accent-3: #3700B3;
+  --accent-4: #c6c660;
   --success: #60C689;
   --error: #CF6679;
   --mcard-height: 25vh;
@@ -415,5 +416,15 @@ body{
 }
 
 .match .mcard.achieved {
-  border-color: var(--success);  
+  border-color: var(--accent-4);  
+}
+
+.match .mcard .name {
+  position: absolute;
+  border: 3px solid var(--grey-5);
+  border-radius: 5px;
+  padding-left: 0.3vh;
+  padding-right: 0.3vh;
+  bottom: 2%;
+  left: 2%;
 }

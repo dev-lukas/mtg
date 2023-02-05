@@ -45,7 +45,7 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto text-center p-0 m-5">
+    <div class="container mx-auto text-center mt-auto p-0 m-5">
         <h4>Coming Soon™</h4>
     </div>
     <div class="container mt-auto">

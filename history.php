@@ -47,96 +47,6 @@
     </nav>
     <div id="matches" class="container mx-auto text-center p-0 m-5">
         <h4 class="pb-3">Match History</h4>
-        <div class="match pt-3 mt-5 mx-auto">
-            <h5>22.10.2022</h5>
-            <div class="row justify-content-center">
-                <div class="playerbox col-3 d-flex justify-content-center">
-                    <div class="player">Lukas</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox winner col-3 d-flex justify-content-center">
-                    <div class="player">Konstantin</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox col-3 d-flex justify-content-center">
-                    <div class="player">Daniel</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox col-3 d-flex justify-content-center">
-                    <div class="player">Tino</div>
-                    <div class="points">4</div>
-                </div>
-            </div>
-            <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
-                <div class="col-3 mcard achieved mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-            </div>
-        </div>
-        <div class="match pt-3 mt-5 mx-auto">
-            <h5>22.10.2022</h5>
-            <div class="row justify-content-center">
-                <div class="playerbox col-2 d-flex justify-content-center">
-                    <div class="player">Lukas</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox winner col-2 d-flex justify-content-center">
-                    <div class="player">Konstantin</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox col-2 d-flex justify-content-center">
-                    <div class="player">Daniel</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox col-2 d-flex justify-content-center">
-                    <div class="player">Tino</div>
-                    <div class="points">4</div>
-                </div>
-                <div class="playerbox col-2 d-flex justify-content-center">
-                    <div class="player">Janis</div>
-                    <div class="points">4</div>
-                </div>
-            </div>
-            <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
-                <div class="col-3 mcard achieved mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-                <div class="col-3 mcard mx-auto">
-                    <span class="title fade">Life Saver</span>
-                    <span class="description fade">Rette einen Mitspieler</span>
-                    <span class="points fade">1</span>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
@@ -151,6 +61,42 @@ window.addEventListener('DOMContentLoaded', (event) => {
     loadMatchData();
 });
 
+function hasPlayer5(match) {
+    if(Object.keys(match).length > 11) {
+        return `<div class="playerbox col-3 d-flex justify-content-center">
+                    <div class="player">${match.player_5.name}</div>
+                    <div class="points">${match.player_5.points}</div>
+                </div>`;
+    } else {
+        return '';
+    }
+}
+
+function isWinner(player, winner) {
+    if(player == winner) {
+        return 'winner';
+    } else {
+        return '';
+    }
+}
+
+function wasAchieved(achieved) {
+    if(achieved == "1") {
+        return 'achieved';
+    } else {
+        return '';
+    }
+}
+
+function wasAchievedFrom(achieved, achievedFrom) {
+    console.log(achieved);
+    if(achieved == "1") {
+        return `<span class="name fade">${achievedFrom}</span>`;
+    } else {
+        return '';
+    }
+}
+
 async function loadMatchData() {
     const response = await fetch('backend/matches/matches.php', {
         method: 'GET',
@@ -158,46 +104,50 @@ async function loadMatchData() {
     const result = await response.json();
     for(let i = 0; i < Object.keys(result).length; i++) {
         document.getElementById('matches').innerHTML += `
-            <div class="match pt-3 mt-5 mx-auto">
-                <h5>${result[i].date}</h5>
+            <div class="match pt-3 mt-5 mx-auto"><h5>${result[i].date}</h5>
                 <div class="row justify-content-center">
-                    <div class="playerbox col-3 d-flex justify-content-center">
-                        <div class="player">${result[i].player_1}</div>
-                        <div class="points">4</div>
+                    <div class="playerbox ${isWinner(result[i].player_1.name, result[i].winner)} col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_1.name}</div>
+                        <div class="points">${result[i].player_1.points}</div>
                     </div>
-                    <div class="playerbox winner col-3 d-flex justify-content-center">
-                        <div class="player">${result[i].player_2}</div>
-                        <div class="points">4</div>
+                    <div class="playerbox ${isWinner(result[i].player_2.name, result[i].winner)} col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_2.name}</div>
+                        <div class="points">${result[i].player_2.points}</div>
                     </div>
-                    <div class="playerbox col-3 d-flex justify-content-center">
-                        <div class="player">${result[i].player_3}</div>
-                        <div class="points">4</div>
+                    <div class="playerbox ${isWinner(result[i].player_3.name, result[i].winner)} col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_3.name}</div>
+                        <div class="points">${result[i].player_3.points}</div>
                     </div>
-                    <div class="playerbox col-3 d-flex justify-content-center">
-                        <div class="player">${result[i].player_4}</div>
-                        <div class="points">4</div>
+                    <div class="playerbox ${isWinner(result[i].player_4.name, result[i].winner)} col-3 d-flex justify-content-center">
+                        <div class="player">${result[i].player_4.name}</div>
+                        <div class="points">${result[i].player_4.points}</div>
                     </div>
+                    ${hasPlayer5(result[i])}
                 </div>
                 <div class="pt-4 pb-3 row d-flex justify-content-center align-items-center">
-                    <div class="col-3 mcard achieved mx-auto">
-                        <span class="title fade">Life Saver</span>
-                        <span class="description fade">Rette einen Mitspieler</span>
-                        <span class="points fade">1</span>
+                    <div class="col-3 mcard ${wasAchieved(result[i].challange_1.achieved)} mx-auto">
+                        <span class="title fade">${result[i].challange_1.name}</span>
+                        <span class="description fade">${result[i].challange_1.content}</span>
+                        <span class="points fade">${result[i].challange_1.points}</span>
+                        ${wasAchievedFrom(result[i].challange_1.achieved, result[i].challange_1.achieved_from)}
                     </div>
-                    <div class="col-3 mcard mx-auto">
-                        <span class="title fade">Life Saver</span>
-                        <span class="description fade">Rette einen Mitspieler</span>
-                        <span class="points fade">1</span>
+                    <div class="col-3 mcard ${wasAchieved(result[i].challange_2.achieved)} mx-auto">
+                        <span class="title fade">${result[i].challange_2.name}</span>
+                        <span class="description fade">${result[i].challange_2.content}</span>
+                        <span class="points fade">${result[i].challange_2.points}</span>
+                        ${wasAchievedFrom(result[i].challange_2.achieved, result[i].challange_2.achieved_from)}
                     </div>
-                    <div class="col-3 mcard mx-auto">
-                        <span class="title fade">Life Saver</span>
-                        <span class="description fade">Rette einen Mitspieler</span>
-                        <span class="points fade">1</span>
+                    <div class="col-3 mcard ${wasAchieved(result[i].challange_3.achieved)} mx-auto">
+                        <span class="title fade">${result[i].challange_3.name}</span>
+                        <span class="description fade">${result[i].challange_3.content}</span>
+                        <span class="points fade">${result[i].challange_3.points}</span>
+                        ${wasAchievedFrom(result[i].challange_3.achieved, result[i].challange_3.achieved_from)}
                     </div>
-                    <div class="col-3 mcard mx-auto">
-                        <span class="title fade">Life Saver</span>
-                        <span class="description fade">Rette einen Mitspieler</span>
-                        <span class="points fade">1</span>
+                    <div class="col-3 mcard ${wasAchieved(result[i].challange_4.achieved)} mx-auto">
+                        <span class="title fade">${result[i].challange_4.name}</span>
+                        <span class="description fade">${result[i].challange_4.content}</span>
+                        <span class="points fade">${result[i].challange_4.points}</span>
+                        ${wasAchievedFrom(result[i].challange_4.achieved, result[i].challange_4.achieved_from)}
                     </div>
                 </div>
             </div>     

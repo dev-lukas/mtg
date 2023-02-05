@@ -60,14 +60,20 @@
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
             <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="history.php">
-                <h3 class="landing-title">Match-History</h3>
+                <h3 class="landing-title">Match History</h3>
                 <i class="landing-icon fa-solid fa-rectangle-list fa-2xl"></i>
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
             <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="randomizer.php">
-                <h3 class="landing-title">Upgrade Tool</h3>  
+                <h3 class="landing-title">Upgrade History</h3>  
                 <i class="landing-icon fa-solid fa-arrow-up fa-2xl"></i>       
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
+            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="information.php">
+                <h3 class="landing-title">Editor</h3>
+                <i class="landing-icon fa-solid fa-pen fa-2xl"></i>  
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">

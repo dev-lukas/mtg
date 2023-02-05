@@ -49,7 +49,7 @@ function getUserData() {
 	Return: MYSQL Table Array Object 
 */
 function getMatchData() {
-	return query("SELECT * FROM `matches`");
+	return query("SELECT * FROM `matches` ORDER BY `date` DESC");
 }
 /*
 	Returns all Challange-Data
