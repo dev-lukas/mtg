@@ -71,13 +71,13 @@
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
-            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="information.php">
+            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="editor.php">
                 <h3 class="landing-title">Editor</h3>
                 <i class="landing-icon fa-solid fa-pen fa-2xl"></i>  
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
-            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="randomizer.php">
+            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="trading.php">
                 <h3 class="landing-title">Trade-Hub</h3>  
                 <i class="landing-icon fa-solid fa-arrow-right-arrow-left fa-2xl"></i>     
             </a>
@@ -93,6 +93,7 @@
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="impressum.php" class="nav-link px-2 text-muted">Impressum</a></li>
+            <li class="nav-item"><a href="dataprotection.php" class="nav-link px-2 text-muted">Datenschutz</a></li>
           </ul>
           <p class="text-center text-muted">MTG Companion is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
         </footer>
