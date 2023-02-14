@@ -349,7 +349,7 @@ body{
   background-color: var(--grey-4);
   border: 3px solid var(--grey-4);
   border-radius: 15px;
-  width: 15vh;
+  width: 10vw;
 }
 
 .google-sign-in div:hover {
@@ -366,7 +366,7 @@ body{
   background-color: var(--grey-4);
   border: 3px solid var(--grey-4);
   border-radius: 15px;
-  width: 15vh;
+  width: 10vw;
 }
 
 .logout i {
@@ -402,8 +402,9 @@ body{
 
 .match .playerbox .points {
   position: absolute;
-  bottom: 20%;
+  bottom: 5%;
   color: var(--accent-1);
+  font-size: 1.5vh;
 }
 
 .match .mcard {
@@ -508,6 +509,11 @@ input:checked + .slider:before {
   border: 2px solid var(--grey-5);
   border-radius: 15px;
   width: 70%;
+  max-width: 500px;
+}
+
+.editor button.delete {
+  border-color: var(--error);
 }
 
 .editor button:hover {

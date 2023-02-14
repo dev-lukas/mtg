@@ -55,16 +55,16 @@
             <span id="matcheditor">
                 <h5>Match Editor</h5>
                 <div class="row pt-3">
-                    <div class="editor col-12 col-lg-6 mt-3">
-                        <h4>Neues Match</h4>
-                        <form>
+                    <div class="editor col-12 col-lg-12 mt-3">
+                        <h4 class="mt-2">Neues Match</h4>
+                        <form id='addMatch' method="POST" action="backend/matches/matchhandler.php?mode=add">
                             <span class="row d-flex justify-content-center">
                                 <div class="col-12 mt-2">
-                                    <input type="date">
+                                    <input type="date" name="date">
                                 </div>
                                 <h5 class="col-12 mt-3">Spieler</h5>
                                 <div class="col-4 mt-2">
-                                    <select class="player" name="Spieler">
+                                    <select class="player" name="player-1">
                                         <option  value="0">Niemand</option>
                                     </select>
                                     <br>
@@ -74,44 +74,44 @@
                                     <input name="player_1_minus_point" type="checkbox">
                                 </div>
                                 <div class="col-4 mt-2">
-                                    <select class="player" name="Spieler">
+                                    <select class="player" name="player-2">
                                         <option value="0">Niemand</option>
                                     </select>
                                     <br>
-                                    <label for="player_1_extra_point">+1</label>
-                                    <input name="player_1_extra_point" type="checkbox">
-                                    <label for="player_1_minus_point">-1</label>
-                                    <input name="player_1_minus_point" type="checkbox">
+                                    <label for="player_2_extra_point">+1</label>
+                                    <input name="player_2_extra_point" type="checkbox">
+                                    <label for="player_2_minus_point">-1</label>
+                                    <input name="player_2_minus_point" type="checkbox">
                                 </div>
                                 <div class="col-4 mt-2">
-                                    <select class="player" name="Spieler">
+                                    <select class="player" name="player-3">
                                         <option value="0">Niemand</option>
                                     </select>
                                     <br>
-                                    <label for="player_1_extra_point">+1</label>
-                                    <input name="player_1_extra_point" type="checkbox">
-                                    <label for="player_1_minus_point">-1</label>
-                                    <input name="player_1_minus_point" type="checkbox">
+                                    <label for="player_3_extra_point">+1</label>
+                                    <input name="player_3_extra_point" type="checkbox">
+                                    <label for="player_3_minus_point">-1</label>
+                                    <input name="player_3_minus_point" type="checkbox">
                                 </div>
                                 <div class="col-4 mt-2">
-                                    <select class="player" name="Spieler">
+                                    <select class="player" name="player-4">
                                         <option value="0">Niemand</option>
                                     </select>
                                     <br>
-                                    <label for="player_1_extra_point">+1</label>
-                                    <input name="player_1_extra_point" type="checkbox">
-                                    <label for="player_1_minus_point">-1</label>
-                                    <input name="player_1_minus_point" type="checkbox">
+                                    <label for="player_4_extra_point">+1</label>
+                                    <input name="player_4_extra_point" type="checkbox">
+                                    <label for="player_4_minus_point">-1</label>
+                                    <input name="player_4_minus_point" type="checkbox">
                                 </div>
                                 <div class="col-4 mt-2">
-                                    <select class="player" name="Spieler">
+                                    <select class="player" name="player-5">
                                         <option value="0">Niemand</option>
                                     </select>
                                     <br>
-                                    <label for="player_1_extra_point">+1</label>
-                                    <input name="player_1_extra_point" type="checkbox">
-                                    <label for="player_1_minus_point">-1</label>
-                                    <input name="player_1_minus_point" type="checkbox">
+                                    <label for="player_5_extra_point">+1</label>
+                                    <input name="player_5_extra_point" type="checkbox">
+                                    <label for="player_5_minus_point">-1</label>
+                                    <input name="player_5_minus_point" type="checkbox">
                                 </div>
                                 <div class="col-12 mt-2">
                                     <label for="winner">Gewinner:</label><br>
@@ -123,37 +123,28 @@
                                 <div class="col-3 mt-2">
                                     <span class="lifesaver">Life Saver</span>
                                     <br>
-                                    <select class="mt-1 player" name="Achiever">
+                                    <select class="mt-1 player" name="achiever-1">
                                         <option value="0">Niemand</option>
                                     </select>
                                 </div>
                                 <div class="col-3 mt-2">
-                                    <select class="challanges" name="Challange">
-                                        <option>Myriad</option>
-                                        <option>Test</option>
-                                    </select>
+                                    <select class="challanges" name="challange-1"></select>
                                     <br>
-                                    <select class="mt-1 player" name="Achiever">
+                                    <select class="mt-1 player" name="achiever-2">
                                         <option value="0">Niemand</option>
                                     </select>
                                 </div>
                                 <div class="col-3 mt-2">
-                                    <select class="challanges" name="Challange">
-                                        <option>Myriad</option>
-                                        <option>Test</option>
-                                    </select>
+                                    <select class="challanges" name="challange-2"></select>
                                     <br>
-                                    <select class="mt-1 player" name="Achiever">
+                                    <select class="mt-1 player" name="achiever-3">
                                         <option value="0">Niemand</option>
                                     </select>
                                 </div>
                                 <div class="col-3 mt-2">
-                                    <select class="challanges" name="Challange">
-                                        <option>Myriad</option>
-                                        <option>Test</option>
-                                    </select>
+                                    <select class="challanges" name="challange-3"></select>
                                     <br>
-                                    <select class="mt-1 player" name="Achiever">
+                                    <select class="mt-1 player" name="achiever-4">
                                         <option value="0">Niemand</option>
                                     </select>     
                                 </div>
@@ -161,8 +152,15 @@
                             </span>
                         </form>
                     </div>
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5>Match bearbeiten</h5>
+                    <div class="editor col-12 col-lg-12 mt-3">
+                        <h4 class="mt-2">Match löschen</h4>
+                        <form id='deleteMatch' method="POST" action="backend/matches/matchhandler.php?mode=delete">
+                            <select class="mt-1" id='dateselect' name="date">
+                                <option selected hidden disabled>Datum wählen</option>
+                            </select>
+                            <br>
+                            <button class="delete mt-3">Löschen</button>
+                        </form>
                     </div>
                 </div>
             </span>
@@ -182,39 +180,48 @@
     </div>
 </body>
 <script>
+var player;
+var challanges;
+var matches;
+
 window.addEventListener('DOMContentLoaded', (event) => {
     readyEditor();
 });
 
 async function readyEditor() {
-    readyPlayer();
-    readyChallanges();
-}
-
-async function readyPlayer() {
-    const response = await fetch('backend/player/player.php', {
+    let response = await fetch('backend/player/player.php', {
         method: 'GET',
     });
-    const result = await response.json();
+    player = await response.json();
+    response = await fetch('backend/challanges/challanges.php', {
+        method: 'GET',
+    });
+    challanges = await response.json();
+    response = await fetch('backend/matches/matches.php', {
+        method: 'GET',
+    });
+    matches = await response.json();
+    displayData();
+}
+
+function displayData() {
     const playerboxes = document.querySelectorAll('select.player');
-    for (const playerbox of playerboxes) {
-        for(let i = 0; i < Object.keys(result).length; i++) {
-            playerbox.innerHTML += `<option value="${result[i].id}">${result[i].name}</option>`;
-        }
-    }
-}
-
-async function readyChallanges() {
-    const response = await fetch('backend/challanges/challanges.php', {
-        method: 'GET',
-    });
-    const result = await response.json();
     const challangeboxes = document.querySelectorAll('select.challanges');
+    const dateselect = document.getElementById('dateselect');
+    for (const playerbox of playerboxes) {
+        for(let i = 0; i < Object.keys(player).length; i++) {
+            playerbox.innerHTML += `<option value="${player[i].id}">${player[i].name}</option>`;
+        }
+    }   
     for (const challangebox of challangeboxes) {
-        for(let i = 0; i < Object.keys(result).length; i++) {
-            challangebox.innerHTML += `<option value="${result[i].id}">${result[i].name}</option>`;
+        for(let i = 0; i < Object.keys(challanges).length; i++) {
+            challangebox.innerHTML += `<option value="${challanges[i].id}">${challanges[i].name}</option>`;
         }
     }
+    for(let i = 0; i < Object.keys(matches).length; i++) {
+        dateselect.innerHTML += `<option value="${matches[i].id}">${matches[i].date}</option>`;
+    }
+
 }
 
 function changeView() {

@@ -10,6 +10,14 @@ $userData = getUserData();
 $challangeData = getChallangeData();
 $json = [];
 
+function achieved($id) {
+    if($id > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 $i = 0;
 foreach ($matchData as $match) {
     
@@ -33,9 +41,9 @@ foreach ($matchData as $match) {
             $json[$i]['challange_'.$h]['name'] = "Life Saver";
             $json[$i]['challange_'.$h]['points'] = 1;
             $json[$i]['challange_'.$h]['content'] = "Rette einen Mitspieler";
-            $json[$i]['challange_'.$h]['achieved'] = $match[16];
-            if($match[20] != 0) {
-                $json[$i]['challange_'.$h]['achieved_from'] = $userData[$match[20] - 1][1];
+            $json[$i]['challange_'.$h]['achieved'] = achieved($match[16]);
+            if($match[16] != 0) {
+                $json[$i]['challange_'.$h]['achieved_from'] = $userData[$match[16] - 1][1];
             } else {
                 $json[$i]['challange_'.$h]['achieved_from'] = 0;
             }
@@ -43,9 +51,9 @@ foreach ($matchData as $match) {
             $json[$i]['challange_'.$h]['name'] = $challangeData[$match[11 + $h] - 1][1];
             $json[$i]['challange_'.$h]['points'] = $challangeData[$match[11 + $h] - 1][2];
             $json[$i]['challange_'.$h]['content'] = $challangeData[$match[11 + $h] - 1][3];
-            $json[$i]['challange_'.$h]['achieved'] = $match[15 + $h];
-            if($match[19 + $h] != 0) {
-                $json[$i]['challange_'.$h]['achieved_from'] = $userData[$match[19 + $h]  - 1][1];
+            $json[$i]['challange_'.$h]['achieved'] = achieved($match[15 + $h]);
+            if($match[15 + $h] != 0) {
+                $json[$i]['challange_'.$h]['achieved_from'] = $userData[$match[15 + $h]  - 1][1];
             } else {
                 $json[$i]['challange_'.$h]['achieved_from'] = 0;
             }
