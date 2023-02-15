@@ -46,6 +46,7 @@
         </div>
     </nav>
     <div class="container mx-auto text-center p-0 m-5">
+        <?php if(isset($_SESSION['id'])) { ?>
         <h3>Editor</h3>
         <label class="switch mt-3">
             <input id="switch" type="checkbox" onclick="changeView()">
@@ -152,7 +153,7 @@
                             </span>
                         </form>
                     </div>
-                    <div class="editor col-12 col-lg-12 mt-3">
+                    <div class="editor col-12 col-lg-12 mt-5">
                         <h4 class="mt-2">Match löschen</h4>
                         <form id='deleteMatch' method="POST" action="backend/matches/matchhandler.php?mode=delete">
                             <select class="mt-1" id='dateselect' name="date">
@@ -166,8 +167,57 @@
             </span>
             <span id="challangeeditor" class="hidden">
                 <h5>Challange Editor</h5>
+                <div class="row pt-3">
+                    <div class="editor col-12 col-lg-12 mt-3">
+                        <h4 class="mt-2">Neue Challange</h4>
+                        <form id="addChallange" method="POST" action="backend/challanges/challangehandler.php?mode=add">
+                            <div class="cardadder mx-auto">
+                                <label for="title">Titel</label>
+                                <br>
+                                <input type="text" name="title">
+                                <br>
+                                <label for="content">Content</label>
+                                <br>
+                                <textarea class="content" name="content"></textarea>
+                                <br>
+                                <label for="points">Punkte</label>
+                                <br>
+                                <input type="number" name="points">
+                            </div>
+                            <button class="mt-3">Hinzufügen</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="editor col-12 col-lg-12 mt-5">
+                        <h4 class="mt-2">Challange löschen</h4>
+                        <form id="deleteChallange" method="POST" action="backend/challanges/challangehandler.php?mode=delete">
+                            <select class="mt-1" id='challangeselect' name="challange">
+                                <option selected hidden disabled>Challange wählen</option>
+                            </select>
+                            <br>
+                            <button class="delete mt-3">Löschen</button>
+                        </form>
+                    </div>
             </span>
         </div>
+        <?php } else { ?>
+        <div class="d-flex justify-content-center align-items-center">
+            <h3>Bitte logge dich ein, um den Editor benutzen zu können</h3>
+        </div>
+        <?php } ?>
+    </div>
+    <div class="modal" tabindex="-1" id="message">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><?php if(isset($_SESSION['title'])) { echo $_SESSION['title']; } ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p><?php if(isset($_SESSION['content'])) { echo $_SESSION['content']; } ?></p>
+                </div>
+            </div>
+         </div>
     </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
@@ -180,13 +230,22 @@
     </div>
 </body>
 <script>
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    <?php if(isset($_SESSION['id'])) { ?>
+    readyEditor();
+    <?php } ?>
+    var message = new bootstrap.Modal(document.getElementById('message'));
+    <?php if(isset($_GET['mode']) && $_GET['mode'] == 'message') { ?>
+    message.show();
+    <?php } ?>
+});
+
+<?php if(isset($_SESSION['id'])) { ?>
 var player;
 var challanges;
 var matches;
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    readyEditor();
-});
 
 async function readyEditor() {
     let response = await fetch('backend/player/player.php', {
@@ -208,6 +267,7 @@ function displayData() {
     const playerboxes = document.querySelectorAll('select.player');
     const challangeboxes = document.querySelectorAll('select.challanges');
     const dateselect = document.getElementById('dateselect');
+    const challangeselect = document.getElementById('challangeselect');
     for (const playerbox of playerboxes) {
         for(let i = 0; i < Object.keys(player).length; i++) {
             playerbox.innerHTML += `<option value="${player[i].id}">${player[i].name}</option>`;
@@ -221,12 +281,15 @@ function displayData() {
     for(let i = 0; i < Object.keys(matches).length; i++) {
         dateselect.innerHTML += `<option value="${matches[i].id}">${matches[i].date}</option>`;
     }
-
+    for(let i = 0; i < Object.keys(challanges).length; i++) {
+        challangeselect.innerHTML += `<option value="${challanges[i].id}">${challanges[i].name}</option>`;
+    }
 }
 
 function changeView() {
     document.getElementById('matcheditor').classList.toggle('hidden');
     document.getElementById('challangeeditor').classList.toggle('hidden');
 }
+<?php } ?>
 </script>
 </html>

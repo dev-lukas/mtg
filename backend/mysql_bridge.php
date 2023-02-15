@@ -79,7 +79,10 @@ function getHighestChallangeID() {
 		return $result[0];	
 	}
 }
-
+/* 
+	Return highest Player ID
+	Return: Integer
+*/
 function getHighestPlayerID() {
 	$results = query("SELECT `id` FROM `user` ORDER BY `id` DESC LIMIT 1");
 	foreach($results as $result) {
@@ -89,15 +92,21 @@ function getHighestPlayerID() {
 
 /*
 	Adds match to match-history
+	Return: Success Boolean
 */
 function addMatch($date, $winner, $player_1, $player_2, $player_3, $player_4, $player_5, $player_1_points, $player_2_points, $player_3_points, $player_4_points, $player_5_points, $challange_1, $challange_2, $challange_3, $achieved_1, $achieved_2, $achieved_3, $achieved_4) {
 	return query_void("INSERT INTO `matches`(`date`, `winner`, `player_1`, `player_2`, `player_3`, `player_4`, `player_5`, `player_1_points`, `player_2_points`, `player_3_points`, `player_4_points`, `player_5_points`, `challange_1`, `challange_2`, `challange_3`, `achieved_1`, `achieved_2`, `achieved_3`, `achieved_4`) VALUES ('$date','$winner','$player_1','$player_2','$player_3','$player_4','$player_5','$player_1_points','$player_2_points','$player_3_points','$player_4_points','$player_5_points','$challange_1','$challange_2','$challange_3','$achieved_1','$achieved_2','$achieved_3','$achieved_4')");
 }
-
+/*
+	Deletes Match from Match History
+	Return: Success Boolean
+*/
 function deleteMatch($id) {
 	return query_void("DELETE FROM `matches` WHERE `id` = '$id'");
 }
-
+/*
+	Attributes Points to all players
+*/
 function attributePoints($player_1, $player_2, $player_3, $player_4, $player_5, $player_1_points, $player_2_points, $player_3_points, $player_4_points, $player_5_points) {
 	query_void("UPDATE `user` SET `points` = `points` + 2 WHERE `id` != '$player_1' AND `id` != '$player_2' AND `id` != '$player_3' AND `id` != '$player_4' AND `id` != '$player_5'");
 	for($i = 1; $i < 6; $i++) {
@@ -108,7 +117,9 @@ function attributePoints($player_1, $player_2, $player_3, $player_4, $player_5, 
 		}
 	}
 }
-
+/*
+	Removes points from all players
+*/
 function removePoints($player_1, $player_2, $player_3, $player_4, $player_5, $player_1_points, $player_2_points, $player_3_points, $player_4_points, $player_5_points) {
 	query_void("UPDATE `user` SET `points` = `points` - 2 WHERE `id` != '$player_1' AND `id` != '$player_2' AND `id` != '$player_3' AND `id` != '$player_4' AND `id` != '$player_5'");
 	for($i = 1; $i < 6; $i++) {
@@ -118,5 +129,34 @@ function removePoints($player_1, $player_2, $player_3, $player_4, $player_5, $pl
 			query_void("UPDATE `user` SET `points` = `points` - $player_points WHERE `id` = '$player'");
 		}
 	}
+}
+/*
+	Inserts a new Challange into the database
+	Return: Success boolean
+*/
+function addChallange($title, $content, $points) {
+	$disabled = 0;
+	global $servername, $username, $password, $dbname;
+    $connection = mysqli_connect($servername, $username, $password, $dbname);
+	if(!$connection) {
+		return false;
+    }
+	$query = mysqli_prepare($connection, 'INSERT INTO `challanges`(`name`, `points`, `content`, `disabled`) VALUES (?, ?, ?, ?)');
+	mysqli_stmt_bind_param($query, 'sisi', $title, $points, $content, $disabled);
+	mysqli_stmt_execute($query);
+	mysqli_close($connection);
+	return true;
+}
+/* 
+	Set Challange to disabled
+*/
+function setChallangeDisabled($id) {
+	return query_void("UPDATE `challanges` SET `disabled` = 1 WHERE `id` = $id");
+}
+/*
+	Delete Challange
+*/
+function deleteChallange($id) {
+	return query_void("DELETE FROM `challanges` WHERE `id` = $id");
 }
 ?>

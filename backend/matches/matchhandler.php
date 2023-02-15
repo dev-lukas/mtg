@@ -5,11 +5,16 @@
 require_once (__DIR__.'/../mysql_bridge.php');
 require_once (__DIR__.'/../auth/google_auth.php');
 
+$link = 'http://localhost/mtg/editor.php?mode=message';
+
 // Simple validate function to sanitze most of the input since we mostly expect only numbers
 function validate($value) {
     if(is_numeric($value)) {
         return ceil(abs($value));
     } else {
+        $_SESSION['title'] = 'Fehler';
+        $_SESSION['content'] = 'Hier ist wohl etwas schiefgelaufen!'; 
+        header('Location: http://localhost/mtg/editor.php?mode=message');
         exit();
     }
 }
@@ -35,25 +40,40 @@ if(isset($_SESSION['id']) && isset($_POST) && isset($_GET)) {
 
         $highestPlayerId = getHighestPlayerID();
         if($player_1 > $highestPlayerId || $player_2 > $highestPlayerId || $player_3 > $highestPlayerId || $player_4 > $highestPlayerId || $player_5 > $highestPlayerId || $winner > $highestPlayerId || $achiever_1 > $highestPlayerId || $achiever_2 > $highestPlayerId || $achiever_3 > $highestPlayerId || $achiever_4 > $highestPlayerId) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Hier ist wohl etwas schiefgelaufen!'; 
+            header('Location: '.$link);
             exit();
         }
 
         if($player_1 == 0 || $player_2 == 0 || $player_3 == 0 || $player_4 == 0) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Du musst mindestens vier Spieler setzten'; 
+            header('Location: '.$link);
             exit();
         }
 
         if($player_1 == $player_2 || $player_1 == $player_3 || $player_1 == $player_4 || $player_2 == $player_3 || $player_2 == $player_4 || $player_3 == $player_4) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Alle Spieler müssen unterschiedlich sein!'; 
+            header('Location: '.$link);
             exit();
         }
 
         if($player_5 != 0) {
             if($player_5 == $player_1 || $player_5 == $player_2 || $player_5 == $player_3 || $player_5 == $player_4) {
+                $_SESSION['title'] = 'Fehler';
+                $_SESSION['content'] = 'Alle Spieler müssen unterschiedlich sein!'; 
+                header('Location: '.$link);
                 exit();
             }
         }
 
         if($winner != 0) {
             if($winner != $player_1 && $winner != $player_2 && $winner != $player_3 && $winner != $player_4 && $winner != $player_5) {
+                $_SESSION['title'] = 'Fehler';
+                $_SESSION['content'] = 'Der Gewinner muss auch am Spiel teilgenommen haben!'; 
+                header('Location: '.$link);
                 exit();
             }
         }
@@ -61,21 +81,33 @@ if(isset($_SESSION['id']) && isset($_POST) && isset($_GET)) {
         for($i = 1; $i < 5; $i++) {
             if(${'achiever_'.$i} != 0) {
                 if(${'achiever_'.$i} != $player_1 && ${'achiever_'.$i} != $player_2 && ${'achiever_'.$i} != $player_3 && ${'achiever_'.$i} != $player_4 && ${'achiever_'.$i} != $player_5) {
+                    $_SESSION['title'] = 'Fehler';
+                    $_SESSION['content'] = 'Challanges können nur von Spieler erfüllt werden die auch teilgenommen haben!'; 
+                    header('Location: '.$link);
                     exit();
                 }
             }
         }
 
         if($challange_2 == 0 || $challange_3 == 0 || $challange_4 == 0) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Alle Challanges müssen gesestzt sein!'; 
+            header('Location: '.$link);
             exit();
         }
 
         if($challange_2 == $challange_3 || $challange_2 == $challange_4 || $challange_2 == $challange_4) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Alle Challanges müssen unterschiedlich sein!'; 
+            header('Location: '.$link);
             exit();
         }
 
         $highestChallangeId = getHighestChallangeID();
         if($challange_2 > $highestChallangeId || $challange_3 > $highestChallangeId || $challange_4 > $highestChallangeId) {
+            $_SESSION['title'] = 'Fehler';
+            $_SESSION['content'] = 'Da ist wohl etwas schiefgelaufen!'; 
+            header('Location: '.$link);
             exit();
         }
 
@@ -99,6 +131,10 @@ if(isset($_SESSION['id']) && isset($_POST) && isset($_GET)) {
         }
         if(addMatch($date, $winner, $player_1, $player_2, $player_3, $player_4, $player_5, $player_1_points, $player_2_points, $player_3_points, $player_4_points, $player_5_points, $challange_2, $challange_3, $challange_4, $achiever_1, $achiever_2, $achiever_3, $achiever_4)) {
             attributePoints($player_1, $player_2, $player_3, $player_4, $player_5, $player_1_points, $player_2_points, $player_3_points, $player_4_points, $player_5_points);
+            $_SESSION['title'] = 'Erfolg';
+            $_SESSION['content'] = 'Das Match wurde erfolgreich erstellt!'; 
+            header('Location: '.$link);
+            exit();
         }
     } else if($_GET['mode'] == 'delete') {
         $id = validate($_POST['date']);
@@ -107,12 +143,22 @@ if(isset($_SESSION['id']) && isset($_POST) && isset($_GET)) {
             if($match[0] == $id) {
                 removePoints($match[3], $match[4], $match[5], $match[6], $match[7], $match[8], $match[9], $match[10], $match[11], $match[12]);
                 deleteMatch($id);
+                $_SESSION['title'] = 'Erfolg';
+                $_SESSION['content'] = 'Das Match wurde erfolgreich gelöscht!'; 
+                header('Location: '.$link);
+                exit();
             }
         }
     } else {
+        $_SESSION['title'] = 'Fehler';
+        $_SESSION['content'] = 'Da ist wohl etwas schiefgelaufen!'; 
+        header('Location: '.$link);
         exit();
     }
 } else {
+    $_SESSION['title'] = 'Fehler';
+    $_SESSION['content'] = 'Da ist wohl etwas schiefgelaufen!'; 
+    header('Location: '.$link);
     exit();
 }
 ?>
