@@ -45,6 +45,13 @@ function getUserData() {
     return query("SELECT * FROM `user`");
 }
 /*
+	Returns all Card-Data
+	Return: MYSQL Table Array Object 
+*/
+function getCardData() {
+    return query("SELECT * FROM `cards`");
+}
+/*
 	Returns all Match-Data
 	Return: MYSQL Table Array Object 
 */
@@ -158,5 +165,26 @@ function setChallangeDisabled($id) {
 */
 function deleteChallange($id) {
 	return query_void("DELETE FROM `challanges` WHERE `id` = $id");
+}
+/*
+	Add a card upgrade
+*/
+function addCard($player, $cardname, $points) {
+	global $servername, $username, $password, $dbname;
+    $connection = mysqli_connect($servername, $username, $password, $dbname);
+	if(!$connection) {
+		return false;
+    }
+	$query = mysqli_prepare($connection, 'INSERT INTO `cards` (`owner`, `artlink`, `points`) VALUES (?, ?, ?)');
+	mysqli_stmt_bind_param($query, 'ssi', $player, $cardname, $points);
+	mysqli_stmt_execute($query);
+	mysqli_close($connection);
+	return true;
+}
+/*
+	Delete Card
+*/
+function deleteCard($id) {
+	return query_void("DELETE FROM `cards` WHERE `id` = $id");
 }
 ?>

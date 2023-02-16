@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-dark navbar-expand-sm static-top">
+    <nav class="navbar navbar-expand-sm static-top navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">MTG Companion</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapNavbar">
@@ -21,9 +21,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                             <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item active" href="upgrade.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="checker.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="history.php">Match History</a></li>
+                            <li><a class="dropdown-item active" href="upgrade.php">Upgrade History</a></li>
+                            <li><a class="dropdown-item" href="editor.php">Editor</a></li>
+                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -45,32 +48,64 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto text-center p-0 m-5">
-        <h4>Cardmarket Preis Checker</h4>
-        <div class="container-search p-1 m-5 mx-auto">
-            <div class="searchInput" id="searchInput">
-                <input id="cardname" type="text" placeholder="Kartenname">
-                <div class="resultBox position-absolute border rounded shadow" id="resultBox"></div>
-                <div id="search" class="icon">
-                    <i class="fas fa-search"></i>
+    <div class="container-fluid mx-auto text-center p-0 mt-5">
+        <h4>Punkte</h4>
+        <div class="row" id="cardArea"></div>
+    </div>
+    <div class="modal" tabindex="-1" id="formAddCard">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upgrade hinzufügen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="addCard" method="POST" action="backend/cards/cardshandler.php?mode=add">
+                    <div class="modal-body text-center">
+                        <div class="searchInput" id="searchInput">
+                            <input id="cardname" type="text" placeholder="Kartenname" name="cardname">
+                            <div class="resultBox position-absolute border rounded shadow" id="resultBox"></div>
+                        </div>
+                        <input class="cardpoints mt-3" type="number" placeholder="Punkte" name="points">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary">Hinzufügen</button>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </div>
+    <div class="modal" tabindex="-1" id="formDeleteCard">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upgrade entfernen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="deleteCard" method="POST" action="backend/cards/cardshandler.php?mode=delete">
+                    <div class="modal-body text-center">
+                        <input type="number" name="id" class="hidden" id="deletePoint">
+                        Bist du dir sicher, dass du dieses Upgrade entfernen willst?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary">Entfernen</button>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </div>
+    <div class="modal" tabindex="-1" id="message">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><?php if(isset($_SESSION['title'])) { echo $_SESSION['title']; } ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p><?php if(isset($_SESSION['content'])) { echo $_SESSION['content']; } ?></p>
                 </div>
             </div>
-        </div>
-        <div id="error" role="alert" class="alert alert-warning hidden"><strong>Tut uns Leid!</strong> Die Cardmarket API ist leider sehr inkosistent. Diese Karte musst du wohl manuell nachschauen!</div>
-        <div class="container-search row m-5 mx-auto">
-            <div class="col-md-6 pt-2">
-                <h5>Preis</h5>
-                <div id="price" class="d-flex align-items-center justify-content-center price-box mx-auto"></div>
-            </div>
-            <div class="col-md-6 pt-2">
-                <h5>Punkte</h5>
-                <div id="points" class="d-flex align-items-center justify-content-center price-box mx-auto"></div>
-            </div>
-        </div>
-        <div class="container mx-auto">
-            <span class="note">Achtung: Die Kartenpreise gelten für Deutsch/Englische Karten von Händlern aus Deutschland in Condition "Good"</span>
-        </div>
-    </div> 
+         </div>
+    </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -79,12 +114,10 @@
           </ul>
           <p class="text-center text-muted">MTG Companion is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
         </footer>
-      </div>
+    </div>
 </body>
 <script>
-//Timeout variable to satisfy api regulations
 let scyrfall_timeout = false;
-let cardmarket_timeout = false;
 
 window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('cardname').onkeyup = (e)=> {
@@ -95,6 +128,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('searchInput').classList.remove("active");
         }
     }
+    var message = new bootstrap.Modal(document.getElementById('message'));
+    <?php if(isset($_GET['mode']) && $_GET['mode'] == 'message') { ?>
+    message.show();
+    <?php } ?>
+    fetchData();
 });
 
 async function fetchScryfallSuggestions() {
@@ -116,79 +154,92 @@ async function fetchScryfallSuggestions() {
         let allList = document.getElementById('resultBox').querySelectorAll("li");
         for (let i = 0; i < allList.length; i++) {
             //adding onclick attribute in all li tag
-            allList[i].setAttribute('onclick', 'requestCardmarketData("' + allList[i].innerText + '")');
+            allList[i].setAttribute('onclick', 'setCard(this)');
         }
     }
-} 
+}
 
-function requestCardmarketData(name) {
-    if(!cardmarket_timeout) {
-        cardmarket_timeout = true;
-        setTimeout(function(){
-            cardmarket_timeout = false;
-        }, 5000);
-        document.getElementById('cardname').value = name;
-        document.getElementById('resultBox').innerHTML = '';
-        document.getElementById('searchInput').classList.remove("active");
-        document.getElementById('price').innerHTML = '<div class="spinner-border"></div>';
-        document.getElementById('points').innerHTML = '<div class="spinner-border"></div>';
-        let cardname = encodeCardmarketCard(name, 0);
-        let cardname_variation = encodeCardmarketCard(name, 1);
-        const postData = new FormData();
-        postData.append('cardname', cardname);
-        postData.append('cardnameVariation', cardname_variation);
-        sendData(postData);
+async function fetchData() {
+    let id = <?php if(isset($_SESSION['id'])) { echo $_SESSION['id']; } else { echo 0; } ?>;
+    let response = await fetch('backend/player/player.php');
+    let data = await response.json();
+    let player_data = data;
+    response = await fetch('backend/cards/cards.php');
+    data = await response.json();
+    let card_data = data;
+    const cardArea = document.getElementById('cardArea');
+    for (let i = 0; i < Object.keys(player_data).length; i++) {
+        let used_points = 0;
+        for(let j = 0; j < Object.keys(card_data).length; j++) {
+            if(card_data[j].owner == player_data[i].id) {
+                used_points += parseInt(card_data[j].points, 10);
+            }
+        }
+        cardArea.innerHTML += `
+            <div class="col pb-2 mx-auto" align="center">
+                <div class="player-points row">
+                    <h5 class="name col-12 pt-1">${player_data[i].name}</h5>
+                    <div class="col-4">
+                        <div class="points pb-1">${player_data[i].points}</div>
+                    </div>
+                    <div class="col-4">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div class="col-4">
+                        <div class="points pb-1">${player_data[i].points - used_points}</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+    for (let i = 0; i < Object.keys(player_data).length; i++) {
+        cardArea.innerHTML += `
+            <div class="col-12 row mx-auto mt-3">
+                <h4>${player_data[i].name}</h4>`;
+        for(let j = 0; j < Object.keys(card_data).length; j++) {
+            if(card_data[j].owner == player_data[i].id) {
+                if(card_data[j].owner == id) {
+                    cardArea.innerHTML += `
+                    <div class="col">
+                        <img class="scryfallcard" src="${card_data[j].artlink}"><br>
+                        <a class="cardremover" onclick="showForm(2, ${card_data[j].id})"><i class="fa-solid fa-circle-minus"></i></a>
+                    </div>`;
+                } else {
+                    cardArea.innerHTML += `
+                    <div class="col">
+                        <img class="scryfallcard" src="${card_data[j].artlink}">
+                    </div>`;
+                }
+                
+            }
+        }
+        if(id == player_data[i].id) {
+            cardArea.innerHTML += `
+                <div class="col my-auto addCard">
+                    <a class="cardbutton" onclick="showForm(1)"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+                </div>`;
+        }
+        cardArea.innerHTML += `</div>`;
     }
 }
 
-//Since cardmarket uses wierd formatting for it's links we need to reformat typical cardnames
-function encodeCardmarketCard(cardname, mode) {
-    let result;
-    switch(mode) {
-        // Some - signs are kept, others not, this case they are kept
-        case 1:
-            result = cardname.replace(/'/g, '');
-            result = result.replace(/,/g, '');
-            result = result.replace(/!/g, '');
-            result = result.replace(/\s\/\/\s/g, '-');
-            result = result.replace(/\s/g, '-');
-            return result;
-            break;
-        // Default Case - remove everything
-        default:
-            result = cardname.replace(/'/g, '');
-            result = result.replace(/-/g, '');
-            result = result.replace(/,/g, '');
-            result = result.replace(/!/g, '');
-            result = result.replace(/\s\/\/\s/g, '-');
-            result = result.replace(/\s/g, '-');
-            return result;
-    }
+function setCard(e) {
+    var field = document.getElementById('cardname');
+    field.value = e.innerHTML; 
+    let resultBox =  document.getElementById('resultBox');
+    resultBox.innerHTML = '';
+    document.getElementById('searchInput').classList.remove("active");
 }
 
-async function sendData(postData) {
-    var dataHeader = new Headers();
-    dataHeader.append('pragma', 'no-cache');
-    dataHeader.append('cache-control', 'no-cache');
-    const response = await fetch('backend/price_scraper.php', {
-        method: 'POST',
-        header: dataHeader,
-        body: postData
-    });
-    const price = await response.text();
-    if(price == '-1' || price == '0') {
-        document.getElementById('price').innerHTML = '';
-        document.getElementById('points').innerHTML = '';
-        document.getElementById('error').classList.toggle('hidden');
-        setTimeout(function() {
-            document.getElementById('error').classList.toggle('hidden');
-        }, 15000);
-        document.getElementById('cardname').value = '';
+function showForm(i, cardid = 0) {
+    if(i == 1) {
+        var form = new bootstrap.Modal(document.getElementById('formAddCard'));
+        form.show();
     } else {
-        const points = Math.ceil(parseFloat((price.replace(/s€/,'')).replace(',','.')));
-        document.getElementById('price').innerHTML = price;
-        document.getElementById('points').innerHTML = points;
+        document.getElementById('deletePoint').value = cardid;
+        var form = new bootstrap.Modal(document.getElementById('formDeleteCard'));
+        form.show();
     }
+    
 }
 </script>
 </html>

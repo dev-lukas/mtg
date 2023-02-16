@@ -32,6 +32,10 @@ if (isset($_GET['code']) && !isset($_SESSION['id'])) {
             $_SESSION['points'] = $user[3];
         }
     }
+    if(!isset($_SESSION['id'])) {
+        header('Location: http://localhost/mtg/index.php?mode=message');
+        exit();
+    }
 } else {
     echo '<span class="not-authorized"></span>';
 }

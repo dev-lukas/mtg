@@ -21,9 +21,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                             <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item" href="upgrade.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="checker.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="history.php">Match History</a></li>
+                            <li><a class="dropdown-item" href="upgrade.php">Upgrade History</a></li>
+                            <li><a class="dropdown-item" href="editor.php">Editor</a></li>
+                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

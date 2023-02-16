@@ -21,9 +21,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                             <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item" href="upgrade.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="checker.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="history.php">Match History</a></li>
+                            <li><a class="dropdown-item" href="upgrade.php">Upgrade History</a></li>
+                            <li><a class="dropdown-item" href="editor.php">Editor</a></li>
+                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -53,7 +56,7 @@
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
-            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="upgrade.php">
+            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="checker.php">
                 <h3 class="landing-title">Preis Checker</h3>
                 <i class="landing-icon fa-solid fa-magnifying-glass fa-2xl"></i>
             </a>
@@ -65,7 +68,7 @@
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-3 pt-3 d-flex justify-content-center align-items-stretch">
-            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="randomizer.php">
+            <a class="landing-tile d-flex container linkbox mx-auto d-flex justify-content-center align-items-center text-decoration-none" href="upgrade.php">
                 <h3 class="landing-title">Upgrade History</h3>  
                 <i class="landing-icon fa-solid fa-arrow-up fa-2xl"></i>       
             </a>
@@ -89,6 +92,19 @@
             </a>
         </div>
     </div>
+    <div class="modal" tabindex="-1" id="message">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tut uns Leid</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Der Login ist leider nur für eine bestimmte Playgroup gedacht! Der Login-Versuch wurde abgebrochen.</p>
+                </div>
+            </div>
+         </div>
+    </div>
     <div class="container mt-auto">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -99,4 +115,12 @@
         </footer>
       </div>
 </body>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    var message = new bootstrap.Modal(document.getElementById('message'));
+    <?php if(isset($_GET['mode']) && $_GET['mode'] == 'message') { ?>
+    message.show();
+    <?php } ?>
+});
+</script>
 </html>

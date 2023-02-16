@@ -19,11 +19,14 @@
             <div class="collapse navbar-collapse" id="collapNavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
+                        <a class="nav-link dropdown-toggle active" href="randomizer.php" role="button" data-bs-toggle="dropdown">Challange</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                             <li><a class="dropdown-item" href="randomizer.php">Challange Randomizer</a></li>
-                            <li><a class="dropdown-item" href="upgrade.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="checker.php">Preis Checker</a></li>
+                            <li><a class="dropdown-item" href="history.php">Match History</a></li>
+                            <li><a class="dropdown-item" href="upgrade.php">Upgrade History</a></li>
+                            <li><a class="dropdown-item active" href="editor.php">Editor</a></li>
+                            <li><a class="dropdown-item" href="information.php">Informationen</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -189,15 +192,15 @@
                     </div>
                 </div>
                 <div class="editor col-12 col-lg-12 mt-5">
-                        <h4 class="mt-2">Challange löschen</h4>
-                        <form id="deleteChallange" method="POST" action="backend/challanges/challangehandler.php?mode=delete">
-                            <select class="mt-1" id='challangeselect' name="challange">
-                                <option selected hidden disabled>Challange wählen</option>
-                            </select>
-                            <br>
-                            <button class="delete mt-3">Löschen</button>
-                        </form>
-                    </div>
+                    <h4 class="mt-2">Challange löschen</h4>
+                    <form id="deleteChallange" method="POST" action="backend/challanges/challangehandler.php?mode=delete">
+                        <select class="mt-1" id='challangeselect' name="challange">
+                            <option selected hidden disabled>Challange wählen</option>
+                        </select>
+                        <br>
+                        <button class="delete mt-3">Löschen</button>
+                    </form>
+                </div>
             </span>
         </div>
         <?php } else { ?>

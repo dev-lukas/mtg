@@ -563,3 +563,67 @@ input:checked + .slider:before {
   height: 40%;
   width: 90%;
 }
+
+.player-points {
+  background-color: var(--grey-3);
+  border: 2px solid var(--grey-4);
+  border-radius: 15px;
+  max-width: 200px;
+  width: 20vw;
+  font-size: 1.5vh;
+}
+
+.player-points h5 {
+  font-size: 1.6vh;
+}
+
+.player-points .points {
+  color: var(--accent-1);
+}
+
+.scryfallcard {
+  height: var(--mcard-height);
+  width: var(--mcard-width);
+}
+
+.cardbutton i {
+  position: absolute;
+  color: var(--accent-1);
+  left: 50%;
+  top: 50%;
+}
+
+.cardbutton i:hover {
+  color: var(--accent-2);
+}
+
+.cardpoints {
+  background: var(--grey-5);
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.modal .searchInput .resultBox {
+  width: 94%;
+}
+
+.cardremover i {
+  color: var(--error);
+  font-size: 2vh;
+}
+
+.cardremover i:hover {
+  color: var(--accent-2);
+}
+
+.addCard {
+  position: relative;
+  min-width: var(--mcard-width);
+  min-height: var(--mcard-height);
+}
