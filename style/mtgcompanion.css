@@ -164,7 +164,15 @@ body{
 
 .note {
   font-size: 1vh;
-  color: var(--grey-5);
+  color: white;
+  background-color: rgba(43, 43, 43, 0.7);
+  border-radius: 25px;
+  width: 20vw;
+}
+
+.important-note {
+  background-color: rgba(43, 43, 43, 0.7);
+  border-radius: 25px;
 }
 
 @property --rotate {
@@ -569,7 +577,7 @@ input:checked + .slider:before {
   border: 2px solid var(--grey-4);
   border-radius: 15px;
   max-width: 200px;
-  width: 20vw;
+  width: 25vw;
   font-size: 1.5vh;
 }
 
@@ -626,4 +634,17 @@ input:checked + .slider:before {
   position: relative;
   min-width: var(--mcard-width);
   min-height: var(--mcard-height);
+}
+
+footer {
+  background-color: rgba(43, 43, 43, 0.7);
+  border-radius: 25px;
+}
+
+footer a {
+  color: white !important;
+}
+
+.player-card-area {
+  background-color: rgba(43, 43, 43, 0.7);
 }

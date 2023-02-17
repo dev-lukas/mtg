@@ -9,7 +9,7 @@
   <link href="style/mtgcompanion.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background: url('img/swamp.jpg') no-repeat center center; background-size: cover;">
     <nav class="navbar navbar-expand-sm static-top navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">MTG Companion</a>
@@ -42,14 +42,14 @@
                 <?php } else { ?>
                 <div class="logout">
                     Hallo <?php echo $_SESSION['name']; ?>!
-                    <a href="backend/auth/logout.php?site=trading.php"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
+                    <a href="backend/auth/logout.php?site=editor.php"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a>
                 </div>
                 <?php } ?>
             </div>
         </div>
     </nav>
+    <?php if(isset($_SESSION['id'])) { ?>
     <div class="container mx-auto text-center p-0 m-5">
-        <?php if(isset($_SESSION['id'])) { ?>
         <h3>Editor</h3>
         <label class="switch mt-3">
             <input id="switch" type="checkbox" onclick="changeView()">
@@ -203,12 +203,12 @@
                 </div>
             </span>
         </div>
-        <?php } else { ?>
-        <div class="d-flex justify-content-center align-items-center">
-            <h3>Bitte logge dich ein, um den Editor benutzen zu können</h3>
-        </div>
-        <?php } ?>
     </div>
+    <?php } else { ?>
+    <div class="container mx-auto text-center mt-auto p-0 m-5">
+        <h4 class="important-note">Bitte logge dich ein, um den Editor benutzen zu können</h4>
+    </div>
+    <?php } ?>
     <div class="modal" tabindex="-1" id="message">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -225,10 +225,10 @@
     <div class="container mt-auto">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="impressum.php" class="nav-link px-2 text-muted">Impressum</a></li>
-            <li class="nav-item"><a href="dataprotection.php" class="nav-link px-2 text-muted">Datenschutz</a></li>
+            <li class="nav-item"><a href="impressum.php" class="nav-link px-2">Impressum</a></li>
+            <li class="nav-item"><a href="dataprotection.php" class="nav-link px-2">Datenschutz</a></li>
           </ul>
-          <p class="text-center text-muted">MTG Companion is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
+          <p class="text-center">MTG Companion is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
         </footer>
     </div>
 </body>
